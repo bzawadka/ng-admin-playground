@@ -20,7 +20,10 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     post.listView().fields([
         nga.field('id'),
         nga.field('title'),
-        nga.field('userId')
+        nga.field('userId', 'reference')
+            .targetEntity(user)
+            .targetField(nga.field('username'))
+            .label('User')
     ]);
     admin.addEntity(post);
 
