@@ -38,7 +38,10 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
                 .targetEntity(user)
                 .targetField(nga.field('username'))
                 .label('User')
-        ]).filters([
+        ])
+        .listActions(['show'])
+        .batchActions([])
+        .filters([
             nga.field('q')
                 .label('Full-Text')
                 .pinned(true),
