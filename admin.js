@@ -13,6 +13,19 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
         nga.field('username'),
         nga.field('email')
     ]);
+    user.creationView().fields([
+        nga.field('name'),
+        nga.field('username'),
+        nga.field('email', 'email'),
+        nga.field('address.street').label('Street'),
+        nga.field('address.city').label('City'),
+        nga.field('address.zipcode').label('Zipcode'),
+        nga.field('phone'),
+        nga.field('website')
+    ]);
+    // use the same fields for the editionView as for the creationView
+    user.editionView().fields(user.creationView().fields());
+
     // add the user entity to the admin application
     admin.addEntity(user);
 
