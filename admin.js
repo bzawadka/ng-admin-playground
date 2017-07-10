@@ -71,6 +71,10 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     ]);
     admin.addEntity(post);
 
+    admin.menu(nga.menu()
+        .addChild(nga.menu(user).icon('<span class="glyphicon glyphicon-user"></span>'))
+        .addChild(nga.menu(post).icon('<span class="glyphicon glyphicon-pencil"></span>'))
+    );
 
     // attach the admin application to the DOM and execute it
     nga.configure(admin);
