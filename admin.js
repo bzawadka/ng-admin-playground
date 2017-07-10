@@ -25,7 +25,25 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
             .targetField(nga.field('username'))
             .label('User')
     ]);
+    post.showView().fields([
+        nga.field('title'),
+        nga.field('body', 'text'),
+        nga.field('userId', 'reference')
+            .targetEntity(user)
+            .targetField(nga.field('username'))
+            .label('User'),
+        nga.field('comments', 'referenced_list')
+            .targetEntity(nga.entity('comments'))
+            .targetReferenceField('postId')
+            .targetFields([
+                nga.field('email'),
+                nga.field('name')
+            ])
+            .sortField('id')
+            .sortDir('DESC'),
+    ]);
     admin.addEntity(post);
+
 
     // attach the admin application to the DOM and execute it
     nga.configure(admin);
