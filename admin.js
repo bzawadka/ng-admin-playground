@@ -30,14 +30,25 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     admin.addEntity(user);
 
     var post = nga.entity('posts');
-    post.listView().fields([
-        nga.field('id'),
-        nga.field('title'),
-        nga.field('userId', 'reference')
-            .targetEntity(user)
-            .targetField(nga.field('username'))
-            .label('User')
-    ]);
+    post.listView()
+        .fields([
+            nga.field('id'),
+            nga.field('title'),
+            nga.field('userId', 'reference')
+                .targetEntity(user)
+                .targetField(nga.field('username'))
+                .label('User')
+        ]).filters([
+            nga.field('q')
+                .label('Full-Text')
+                .pinned(true),
+            nga.field('userId', 'reference')
+                .targetEntity(user)
+                .targetField(nga.field('username'))
+                .label('User')
+        ]);
+    // filtering URL: http://jsonplaceholder.typicode.com/posts?q=foo&userId=1234
+
     post.showView().fields([
         nga.field('title'),
         nga.field('body', 'text'),
